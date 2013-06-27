@@ -20,7 +20,7 @@ if $0 == __FILE__
     mark_id = row[2]
     begin
       #puts "#{word1}, #{word2}"
-      print "#{counter} " if (counter % 100 == 0)
+      print "\rRecord : #{counter} "  # if (counter % 100 == 0)
 
       @h.save_pair(word1,word2, mark_id)
     rescue 

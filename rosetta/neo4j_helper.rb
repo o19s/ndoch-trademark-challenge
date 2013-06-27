@@ -76,7 +76,7 @@ class Helper
 	def setup
 		Neography.configure do |config|
 		  config.protocol       = "http://"
-		  config.server         = "ec2-107-20-35-179.compute-1.amazonaws.com"
+		  config.server         = "ec2-50-19-204-17.compute-1.amazonaws.com"
 		  config.port           = 7474
 		  config.directory      = ""  # prefix this path with '/' 
 		  config.cypher_path    = "/cypher"
