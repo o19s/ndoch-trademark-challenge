@@ -1,0 +1,39 @@
+---
+# ansible-playbook deploy_neo4j.yml -vv --private-key=/path/to/ec2/pri/key
+
+- name: Configure instance
+  hosts: neo4j
+  user: ubuntu
+  sudo: yes
+  gather_facts: true
+
+  tags:
+    - config
+    - configure 
+
+  tasks:
+    - name: Adding Neo4j deb key
+      apt_key: url=http://debian.neo4j.org/neotechnology.gpg.key state=present
+      
+    - name: Adding Neo4j repo
+      apt_repository: repo='deb http://debian.neo4j.org/repo testing/'
+      
+    - name: Installing Neo4j
+      apt: pkg=neo4j update_cache=yes
+      notify: restart_neo4j 
+
+    - name: Configuring Neo4j Server Properties - IP Filter
+      lineinfile: dest=/etc/neo4j/neo4j-server.properties regexp='^#?org.neo4j.server.webserver.address=*' line=org.neo4j.server.webserver.address=0.0.0.0
+      notify: restart_neo4j
+
+    - name: Configuring Neo4j Properties - Autoindexing
+      lineinfile: dest=/etc/neo4j/neo4j.properties regexp='^#?node_auto_indexing=*' line=node_auto_indexing=true
+      notify: restart_neo4j
+
+    - name: Configuring Neo4j Properties - Property keys to autoindex
+      lineinfile: dest=/etc/neo4j/neo4j.properties regexp='^#?node_keys_indexable=*' line=node_keys_indexable=word,mark_id
+      notify: restart_neo4j
+
+  handlers:
+    - name: restart_neo4j
+      action: service name=neo4j-service state=restarted
