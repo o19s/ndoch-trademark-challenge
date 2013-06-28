@@ -10,7 +10,8 @@ Applications built for the National Day of Civic Hacking's USPTO Trademarks Chal
 #### 1. Create a new EC2 Security Group
 
 - [Amazon has a great walkthrough][1]
-- Port 7474 should be carefully restricted (Neo4j access)
+- Port 7474 should be open (Neo4j access)
+    - In production you might want to change this! 
 - Port 22 should be open (SSH Access)
 
 #### 2. Create and download an EC2 keypair
@@ -33,7 +34,7 @@ Applications built for the National Day of Civic Hacking's USPTO Trademarks Chal
 
 #### 2. Set IP to target in Ansible
 
->/etc/ansible/hosts
+>etc/ansible/hosts
  
 - Add the following lines
 
@@ -42,7 +43,7 @@ Applications built for the National Day of Civic Hacking's USPTO Trademarks Chal
 
 #### 3. Run Ansible
 	
->ansible-playbook deploy/deploy_neo4j.yml -vv --private-keyy=/path/to/ec2/pri/key
+>ansible-playbook deploy/deploy_neo4j.yml -vv --private-key=/path/to/ec2/pri/key
 
 ##Load Data into Neo4j
 #### 1. Configure the helper script
