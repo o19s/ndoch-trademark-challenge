@@ -1,0 +1,5 @@
+lewis/solr/*
+lewis/app/log/*
+lewis/app/tmp/*
+lewis/app/.bundle
+
