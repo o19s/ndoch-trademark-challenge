@@ -45,7 +45,7 @@ class ExploreController < ApplicationController
 		
 		query = query + ")"
 		query = URI::encode(query)
-		response = HTTParty.get("http://ec2-67-202-1-178.compute-1.amazonaws.com:8888/solr/trademarks/select?q=#{query}&fl=MarkIdentification,id&q.op=OR&&wt=json")
+		response = HTTParty.get("http://rosetta.bloom.sh:8983/solr/trademarks/select?q=#{query}&fl=MarkIdentification,id&q.op=OR&&wt=json")
 
 			
 		result = JSON.parse(response.body)['response']['docs']
@@ -58,7 +58,7 @@ class ExploreController < ApplicationController
 		unless query.blank?
 			query = query.upcase
 			rows = 1000
-			response = HTTParty.get("http://localhost:8983/solr/clustering?echoParams=ALL&carrot.snippet=code_text&qf=code_text&q=code_text:#{URI::encode(query)}&clustering.collection=true&rows=#{rows}&carrot.title=code_text&fl=code_text,id&wt=json")
+			response = HTTParty.get("http://rosetta.bloom.sh:8983/solr/clustering?echoParams=ALL&carrot.snippet=code_text&qf=code_text&q=code_text:#{URI::encode(query)}&clustering.collection=true&rows=#{rows}&carrot.title=code_text&fl=code_text,id&wt=json")
 
 			
 			clusters = JSON.parse(response.body)['clusters']

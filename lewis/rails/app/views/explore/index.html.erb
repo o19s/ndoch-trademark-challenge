@@ -1,54 +1,46 @@
-<h1>Join Meriweather Lewis on his exploration of Trademark Data!</h1>
-<img src="http://www.wpclipart.com/American_History/discovery/Lewis_and_Clark/Meriwether_Lewis.png" align="left"/>
+  <div class='jumbotron span4'>
+    <h1>Lewis</h1>
+    <p class="lead">Join Meriweather Lewis on his exploration of Trademark Data!</p>
+    <%= form_tag({:controller => "explore", :action => "index"}, :class => 'form-search') do %>
+      <%= text_field_tag(:query, @query, :class => 'input_large') %>
+      
+      <%= submit_tag("Explore!", :class => 'btn btn-success') %>
+    <% end %>
+    <img class="lewisPicture" src="http://ushistoryimages.com/images/meriwether-lewis/fullsize/meriwether-lewis-4.jpg" alt="Translations to Hill"</img>
 
-<%= form_tag(:controller => "explore", :action => "index") do %>
-  <%= text_field_tag(:query, @query) %>
-  
-  <%= submit_tag("Explore!") %>
-<% end %>
 
-<% if @clusters %>
+  </div>
+  <div class="span8" id="results">
+    <div id="graph" />
+    <% if @clusters %>
 
-  <% @clusters.each do |e| %>
+      <% @clusters.each do |e| %>
 
-    <b>
-      <%=link_to e['labels'].first, :controller => "explore", :action => "index", :query => e['labels'].first%>
-    </b>
-    <p>
-      <% if 1 == 1 and  e['mark_names'] %>
-        <% e['mark_names'].each do |doc| %>
-          <%= doc["MarkIdentification"].first %>,
-        <% end %>
+        <b>
+          <%=link_to e['labels'].first, :controller => "explore", :action => "index", :query => e['labels'].first%>
+        </b>
+        <p>
+          <% if 1 == 1 and  e['mark_names'] %>
+            <% e['mark_names'].each do |doc| %>
+              <%= doc["MarkIdentification"].first %>,
+            <% end %>
+          <% end %>
+
+          <% if 1 == 2 %>
+            <% e['docs'].each do |doc| %>
+              <%= doc %>,
+            <% end %>
+          <% end %>
+        </p>
+
       <% end %>
-
-      <% if 1 == 2 %>
-        <% e['docs'].each do |doc| %>
-          <%= doc %>,
-        <% end %>
-      <% end %>
-    </p>
-
-  <% end %>
-<% end %>
+    <% end %>
+  </div>
 
 
-<br />
-
-
-<!DOCTYPE html>
-<meta charset="utf-8">
-<style>
-
-text {
-  font: 10px sans-serif;
-}
-
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var diameter = 960,
+var diameter = 900,
     format = d3.format(",d"),
     color = d3.scale.category20c();
 
@@ -57,7 +49,7 @@ var bubble = d3.layout.pack()
     .size([diameter, diameter])
     .padding(1.5);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#graph").append("svg")
     .attr("width", diameter)
     .attr("height", diameter)
     .attr("class", "bubble");

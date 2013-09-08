@@ -1,14 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lewis</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+<meta charset="utf-8">
+<title>Lewis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="bloomeng">
+<%= stylesheet_link_tag    "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<%= csrf_meta_tags %>
+
+<style type="text/css">
+body {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+}
+.jumbotron h1 {
+  font-size: 72px;
+  line-height: 1;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 60px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+</style>
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+  <div class="masthead">
+    <ul class="nav nav-pills pull-right">
+      <li><a href="http://www.opensourceconnections.com">Home</a></li>
+      <li><a href="http://rosetta.bloom.sh">Rosetta</a></li>
+      <li class="active"><a href="#">Lewis</a></li>
+      <li><a href="http://www.opensourceconnections.com/contact-us/">Contact</a></li>
+    </ul>
+    <h3 class="muted">OpenSource Connections</h3>
+  </div>
+  <hr>
+  <div class="row-fluid marketing">
+    <%= yield %>
+  </div>
+  <hr>
+  <div class="footer">
+    <p>&copy; Open Source Connections 2013, Bloom 2013</p>
+  </div>
+</div>
 
 </body>
 </html>
+
+
+
