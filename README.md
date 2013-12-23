@@ -64,3 +64,8 @@ Applications built for the National Day of Civic Hacking's USPTO Trademarks Chal
 [1]: http://docs.aws.amazon.com/gettingstarted/latest/wah/getting-started-security-group.html
 [2]: http://ansible.cc/
 
+
+## To log on, run something like:
+
+>ssh -i ~/.ssh/rosetta-ndoch.pem ubuntu@lewis.bloom.sh
+
